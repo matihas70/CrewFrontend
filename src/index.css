@@ -1,0 +1,26 @@
+:root{
+  --blue1: #cef1ff;
+  --green1: #ceffd3;
+  --yellow1: #f8ffce;
+  --red1: #ffcece;
+  --blue2: #219ebc;
+  --blue3: #70d6ff;
+  --dark-blue: #04365b;
+  --dark-green: #045b14;
+  --dark-yellow: #515b04;
+  --dark-red: #5b0404;
+  
+
+  --yellow: #ffb703;
+  --orange: #fb8500;
+}
+body{
+  margin: 0;
+  font-family: 'Roboto';
+  font-weight: 300;
+}
+.App{
+  width: 100vw;
+  min-height: 100vh;
+  background-color: white;
+}
