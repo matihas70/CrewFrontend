@@ -1,0 +1,56 @@
+
+.main-info{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+}
+.profile-photo{
+    
+    
+}
+.photo{
+    width: 250px;
+    height: 250px;
+    border-radius: 300px;
+    box-shadow: 0 0 2px 1px gray;
+    position: relative;
+    overflow: hidden;
+}
+.profile-photo:hover{
+    cursor: pointer;
+}
+.profile-photo img{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.more-width img{
+    max-height: 100%;
+}
+.more-height img{
+    max-width: 100%;
+}
+
+label{
+    cursor: inherit;
+    width: fit-content;
+    display: block;
+}
+.photo-upload{
+    
+}
+.profile-photo input{
+    display: none;
+}
+.profile-photo i{
+    border: 1px solid gray;
+}
