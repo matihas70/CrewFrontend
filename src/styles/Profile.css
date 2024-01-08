@@ -30,8 +30,10 @@
 }
 .profile-photo img{
     position: absolute;
-    top: 0;
-    left: 0;
+   
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .more-width img{
     max-height: 100%;
@@ -44,6 +46,8 @@ label{
     cursor: inherit;
     width: fit-content;
     display: block;
+    margin: auto;
+    margin-top: 20px;
 }
 .photo-upload{
     
@@ -51,6 +55,16 @@ label{
 .profile-photo input{
     display: none;
 }
-.profile-photo i{
-    border: 1px solid gray;
+.profile-photo p{
+    border: 2px solid #37a7ed;
+    border-radius: 15px;
+    box-shadow: 0 0 2px 0 #37a7ed;
+    color: #37a7ed;
+    font-weight: 500;
+    padding: 5px;
+    margin: 0;
+    transition: background-color .3s;
+}
+.profile-photo p:hover{
+    background-color: #e2f2fb;
 }
