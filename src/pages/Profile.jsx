@@ -10,14 +10,14 @@ function Profile() {
     return (
         <>
             <div className="container">
-                <div className="photos">
-                    <div className="profile-photo">
-                        <ProfilePhoto></ProfilePhoto>
-                    </div>
+                <div className="profile-photo">
+                    <ProfilePhoto></ProfilePhoto>
                 </div>
-
                 <div className="main-info">
                     {textboxLabels.map(t => (<Textbox label={t} key={t} />))}
+                </div>
+                <div className="buttons">
+                    <div className="btn save">Save</div>
                 </div>
             </div>
         </>

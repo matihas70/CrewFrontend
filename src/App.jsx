@@ -1,6 +1,7 @@
 import Home from "./Pages/Home"
 import Profile from "./pages/Profile"
 import { Link, Route, Routes } from "react-router-dom"
+import './App.css'
 
 function App() {
   return (

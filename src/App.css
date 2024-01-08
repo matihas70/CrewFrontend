@@ -1,0 +1,22 @@
+.btn{
+    border: 2px solid var(--button-blue);
+    border-radius: 8px;
+    box-shadow: 0 0 2px 0 var(--button-blue);
+    color: var(--button-blue);
+    font-weight: 500;
+    padding: 5px;
+    margin: 0;
+    transition: background-color .3s
+}
+.btn.save{
+    border-color:#2ea438;
+    box-shadow: 0 0 2px 0 #2ea438;
+    color: #2ea438;
+}
+.btn:hover{
+    cursor: pointer;
+    background-color: #e2f2fb;
+}
+.btn.save:hover{
+    background-color: #e2fbe2;
+}

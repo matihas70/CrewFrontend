@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../../styles/ProfilePhoto.css'
 
 function ProfilePhoto() {
     const [photoURL, setPhotoURL] = useState('')
@@ -31,7 +32,7 @@ function ProfilePhoto() {
                 {photoURL && <img src={photoURL}></img>}
             </div>
             <label htmlFor="photo-upload">
-                <p>Change photo</p>
+                <p className="btn">Change photo</p>
             </label>
             <input id="photo-upload" type="file" onChange={onUpload} accept="image/png, image/jpeg, image/jpg" />
         </>
