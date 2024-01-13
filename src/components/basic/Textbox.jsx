@@ -1,12 +1,18 @@
+import { useRef } from 'react'
 import '../../styles/Textbox.css'
-function Textbox({ label }) {
+function Textbox({ label, sendValue }) {
+
+    const sendValOnChange = (event) => {
+        sendValue(event.target.value)
+    }
+
     return (
         <div className="textbox">
             <div className="label">
                 <span>{label}</span>
             </div>
             <div>
-                <input type="text" />
+                <input onChange={sendValOnChange} type="text" />
             </div>
         </div>
     )

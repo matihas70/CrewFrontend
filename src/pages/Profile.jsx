@@ -18,6 +18,7 @@ function Profile() {
                 </div>
                 <div className="buttons">
                     <div className="btn save">Save</div>
+                    <div className="btn save">Go to home</div>
                 </div>
             </div>
         </>
