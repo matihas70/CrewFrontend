@@ -1,0 +1,13 @@
+.register-box{
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

@@ -1,0 +1,13 @@
+.placeholder{
+    position: relative;
+    width: 400px;
+    margin: auto;
+    background-color: var(--blue1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.status-icon{
+    width: 100px;
+}
