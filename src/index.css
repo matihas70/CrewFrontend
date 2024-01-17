@@ -14,11 +14,13 @@
 
   --yellow: #ffb703;
   --orange: #fb8500;
+
 }
 body{
   margin: 0;
   font-family: 'Roboto';
   font-weight: 300;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 .App{
   width: 100vw;

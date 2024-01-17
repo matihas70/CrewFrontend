@@ -8,7 +8,7 @@ function Activated() {
     return (
         <div className="placeholder">
             <img className="status-icon" src={`/icons/${isActivated ? "tick" : "error"}.svg`} alt="" />
-            <span>{isActivated ? "Good" : "Bad"}</span>
+            <span>{isActivated ? "Account activated" : "Error, can't activate the account"}</span>
         </div>
     )
 }
