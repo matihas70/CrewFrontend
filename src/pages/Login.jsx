@@ -1,13 +1,19 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Textbox from "../components/basic/Textbox"
 import "../styles/Login.css"
 import Connector from "../services/Connector";
+import AuthContext from "../contexts/AuthProvider";
+import useAuth from "../hooks/useAuth";
 function Login() {
+    const { SetAuthenticated } = useAuth()
     const [loginVal, setLoginVal] = useState("");
     const [passwordVal, setPasswordVal] = useState("");
 
     const login = async (event) => {
-        await Connector.Login(loginVal, passwordVal);
+        const token = await Connector.Login(loginVal, passwordVal)
+        if (token) {
+            SetAuthenticated({ email: loginVal, token });
+        }
     }
 
     return (

@@ -4,7 +4,7 @@ export default class Connector {
 
         const options = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({
                 Name: name,
                 Surname: surname,
@@ -25,16 +25,29 @@ export default class Connector {
     static async Login (email, password){
         const options ={
             method: 'POST',
+            mode: 'cors',
             headers:{'Content-Type': 'application/json'},
             body: JSON.stringify({
                 Email: email,
                 Password: password
             }) 
         }
-        let response= await fetch(Urls.Back + '/Account/Login', options)
-        
-        console.log(response);
-        //.then(data => response = data);
-        return true
+
+        let response
+        let token
+        await fetch(Urls.Back + '/Account/Login', options)
+                                .then(res => {
+                                    console.log(res)
+                                    response = res;
+                                    return res.text()
+                                })
+                                .then(data => token = data);
+
+        if(response.ok){
+            return token
+        }
+        else{
+            return false
+        }
     }
 }
