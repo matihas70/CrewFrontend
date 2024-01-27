@@ -1,12 +1,12 @@
 import useAuth from "../hooks/useAuth";
 import { useLocation, Navigate, Outlet } from "react-router-dom"
 function Protected() {
-    const { token } = useAuth()
+    const { auth } = useAuth()
     const location = useLocation();
     return (
-        token
+        auth.token
             ? <Outlet />
-            : <Navigate to="account/login" />
+            : <Navigate to="account/login" state={{ from: location }} replace />
     )
 }
 export default Protected

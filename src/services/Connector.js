@@ -1,5 +1,20 @@
 import Urls from "../Consts/Urls";
 export default class Connector {
+
+
+    static async Save(path, dto){
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                Name: name,
+                Surname: surname,
+                Email: email,
+                Password: password
+            })
+        }
+    }
+
     static async Register(name, surname, email, password) {
 
         const options = {
@@ -49,5 +64,23 @@ export default class Connector {
         else{
             return false
         }
+    }
+    static async RefreshToken(){
+        const options ={
+            method: 'POST',
+            mode: 'cors',
+            headers:{'Content-Type': 'application/json'},
+        }
+        let response
+        let token
+        await fetch(Urls.Back + '/Account/Refresh', options)
+                                .then(res => {
+                                    console.log(res)
+                                    response = res;
+                                    return res.text()
+                                })
+                                .then(data => token = data);
+        
+        
     }
 }

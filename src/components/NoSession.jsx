@@ -1,10 +1,10 @@
 import useAuth from "../hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom"
 function NoSession() {
-    const { token } = useAuth();
+    const { auth } = useAuth();
 
     return (
-        token
+        auth.token
             ? <Navigate to='/' />
             : <Outlet />
     )

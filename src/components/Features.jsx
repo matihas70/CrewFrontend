@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Features() {
     const items = [
@@ -27,12 +27,12 @@ function Features() {
             description: "Add photos and create albums",
         }
     ];
-
+    const navigate = useNavigate();
     return (
         <>
             <div id="features-grid">
                 {items.map(i => (
-                    <div key={i.header} className={"feature " + i.class} onClick={() => { window.location.href = i.class }}>
+                    <div key={i.header} className={"feature " + i.class} onClick={() => { navigate('/' + i.class) }}>
                         <div className="hover-div"></div>
                         <div className="inner-feature">
                             <h2>{i.header}</h2>

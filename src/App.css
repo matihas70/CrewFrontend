@@ -8,20 +8,19 @@
     transition: background-color .3s
 }
 .btn.green{
-    border-color:#2ea438;
-    background-color: white;
-    box-shadow: 0 0 2px 0 #2ea438;
-    color: #2ea438;
+    background-color: #0d9f2d;
+    color: #cef7d4;
 }
 .btn.blue{
     background-color: #0d619f;
     color: #cee6f7;
     
 }
-.btn:hover{
+.btn.blue:hover{
     cursor: pointer;
     box-shadow: 0 0 4px 0 #0d619f;
 }
-.btn.save:hover{
-    background-color: #e2fbe2;
+.btn.green:hover{
+    cursor: pointer;
+    box-shadow: 0 0 4px 0 #0d9f2d;
 }

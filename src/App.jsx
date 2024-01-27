@@ -2,18 +2,45 @@ import Home from "./Pages/Home"
 import Profile from "./pages/Profile"
 import { Link, Route, Routes } from "react-router-dom"
 import './App.css'
+import Urls from "./Consts/Urls.js"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Activated from "./pages/Activated"
 import { useContext, useEffect, useState } from "react"
 import NoSession from "./components/NoSession"
 import Protected from "./components/Protected"
-import AuthContext from "./contexts/AuthProvider.jsx"
+import AuthContext, { AuthProvider } from "./contexts/AuthProvider.jsx"
+import useAuth from "./hooks/useAuth.js"
 function App() {
-  //const auth = useAuth();
+  const { setAuth } = useAuth();
+
+
+  useEffect(async () => {
+
+    async function checkSession() {
+      const options = {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+      await fetch(Urls.Back + "/Account/Refresh", options)
+        .then(res => res.text())
+        .then(data => {
+          console.log(data);
+          setAuth({ token: data })
+        })
+    }
+
+    checkSession();
+
+  }, [])
+
+
 
   return (
-    <div className="App">
+    <div className="App" >
       <Routes>
         <Route element={<NoSession />}>
           <Route path='account'>
@@ -28,7 +55,7 @@ function App() {
         </Route>
       </Routes>
 
-    </div>
+    </div >
   )
 }
 
