@@ -4,7 +4,7 @@ function NoSession() {
     const { auth } = useAuth();
 
     return (
-        auth.token
+        auth?.token
             ? <Navigate to='/' />
             : <Outlet />
     )

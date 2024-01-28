@@ -4,7 +4,7 @@ function Protected() {
     const { auth } = useAuth()
     const location = useLocation();
     return (
-        auth.token
+        auth?.token
             ? <Outlet />
             : <Navigate to="account/login" state={{ from: location }} replace />
     )

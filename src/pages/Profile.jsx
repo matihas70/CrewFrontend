@@ -9,25 +9,28 @@ function Profile() {
 
     const textboxLabels = ["Name", "Surname", "Callname"]
     const { auth } = useAuth();
-    useEffect(async () => {
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + auth.token
-            },
+    useEffect(() => {
+        async function getData() {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + auth.token
+                },
+            }
+            let resData
+            await fetch(Urls.Back + '/User', options)
+                .then(res => {
+                    console.log(res)
+                    return res.json()
+                }).then(data => {
+                    resData = data
+                });
+            textboxRefs["Name"].current.value = resData["name"]
+            textboxRefs["Surname"].current.value = resData["surname"]
+            textboxRefs["Callname"].current.value = resData["callname"]
         }
-        let resData
-        await fetch(Urls.Back + '/User', options)
-            .then(res => {
-                console.log(res)
-                return res.json()
-            }).then(data => {
-                resData = data
-            });
-        textboxRefs["Name"].current.value = resData["name"]
-        textboxRefs["Surname"].current.value = resData["surname"]
-        textboxRefs["Callname"].current.value = resData["callname"]
+        getData()
     }, [])
     const textboxRefs = {};
     const textFields = textboxLabels.map(t => {

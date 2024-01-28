@@ -9,8 +9,8 @@ import Activated from "./pages/Activated"
 import { useContext, useEffect, useState } from "react"
 import NoSession from "./components/NoSession"
 import Protected from "./components/Protected"
-import AuthContext, { AuthProvider } from "./contexts/AuthProvider.jsx"
 import useAuth from "./hooks/useAuth.js"
+import NavBar from "./components/NavBar"
 function App() {
   const { setAuth } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -28,12 +28,15 @@ function App() {
       await fetch(Urls.Back + "/Account/Refresh", options)
         .then(res => {
           if (res.status == 200) {
-            setAuth({ token: res.text() });
+            return res.text();
           }
-          setLoading(false);
+        }).then(token => {
+          setAuth({ token });
+          setLoading(false)
         })
         .catch(err => {
           console.log(err)
+          setLoading(false)
         })
     }
     if (loading)
@@ -47,6 +50,7 @@ function App() {
   return (
     <div className="App" >
       <Routes>
+
         <Route element={<NoSession />}>
           <Route path='account'>
             <Route path="register" element={<Register />}></Route>
@@ -55,8 +59,11 @@ function App() {
           </Route>
         </Route>
         <Route element={<Protected />}>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/profile' element={<Profile />}></Route>
+          <Route element={<NavBar />}>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/profile' element={<Profile />}></Route>
+          </Route>
+
         </Route>
       </Routes>
 
