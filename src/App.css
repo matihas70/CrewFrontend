@@ -7,20 +7,27 @@
     margin: 0;
     transition: background-color .3s
 }
+.btn:hover{
+    cursor: pointer;
+}
 .btn.green{
     background-color: #0d9f2d;
     color: #cef7d4;
 }
+.btn.green:hover{
+    box-shadow: 0 0 4px 0 #0d9f2d;
+}
 .btn.blue{
-    background-color: #0d619f;
+    background-color: #439cff;
     color: #cee6f7;
     
 }
 .btn.blue:hover{
-    cursor: pointer;
     box-shadow: 0 0 4px 0 #0d619f;
 }
-.btn.green:hover{
-    cursor: pointer;
-    box-shadow: 0 0 4px 0 #0d9f2d;
+.btn.gray{
+    background-color: #d2d2d2;
+}
+.btn.gray:hover{
+    box-shadow: 0 0 4px 0 #d2d2d2;
 }

@@ -4,11 +4,13 @@ import ProfilePhoto from "../components/complex/ProfilePhoto"
 import '../styles/Profile.css'
 import useAuth from '../hooks/useAuth'
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Urls from "../Consts/Urls"
 function Profile() {
 
     const textboxLabels = ["Name", "Surname", "Callname"]
     const { auth } = useAuth();
+    const navigate = useNavigate();
     useEffect(() => {
         async function getData() {
             const options = {
@@ -32,6 +34,8 @@ function Profile() {
         }
         getData()
     }, [])
+
+    const [photoUrl, setPhotoURL] = useState('');
     const textboxRefs = {};
     const textFields = textboxLabels.map(t => {
         const ref = useRef(null)
@@ -41,16 +45,25 @@ function Profile() {
     return (
         <>
             <div className="container">
-                <div className="profile-photo">
-                    <ProfilePhoto></ProfilePhoto>
+                <div className="content">
+                    <div className="inner">
+                        <div className="left">
+                            <div className="profile-photo">
+                                <ProfilePhoto sendPhotoUrl={setPhotoURL}></ProfilePhoto>
+                            </div>
+                        </div>
+                        <div className="right">
+                            <div className="main-info">
+                                {textFields}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="buttons">
+                        <button className="btn blue" onClick={() => { navigate('/') }}>Go to home</button>
+                        <button className="btn green" >Save</button>
+                    </div>
                 </div>
-                <div className="main-info">
-                    {textFields}
-                </div>
-                <div className="buttons">
-                    <div className="btn green">Save</div>
-                    <div className="btn blue">Go to home</div>
-                </div>
+
             </div>
         </>
     )

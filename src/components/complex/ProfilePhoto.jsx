@@ -1,9 +1,10 @@
 import { useState } from "react";
 import '../../styles/ProfilePhoto.css'
 
-function ProfilePhoto() {
+function ProfilePhoto({ sendPhotoUrl }) {
     const [photoURL, setPhotoURL] = useState('')
     const [photoRatioClass, setPhotoRatioClass] = useState('')
+
     const onUpload = (event) => {
         console.log(event.target.files[0]);
         const [file] = event.target.files
@@ -24,6 +25,7 @@ function ProfilePhoto() {
             }
             reader.readAsDataURL(file);
             setPhotoURL(URL.createObjectURL(file));
+            sendPhotoUrl(URL.createObjectURL(file))
         }
     }
     return (
@@ -32,7 +34,7 @@ function ProfilePhoto() {
                 {photoURL && <img src={photoURL}></img>}
             </div>
             <label htmlFor="photo-upload">
-                <p className="btn">Change photo</p>
+                <p className="btn gray">Change photo</p>
             </label>
             <input id="photo-upload" type="file" onChange={onUpload} accept="image/png, image/jpeg, image/jpg" />
         </>
