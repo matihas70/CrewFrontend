@@ -13,32 +13,37 @@ import AuthContext, { AuthProvider } from "./contexts/AuthProvider.jsx"
 import useAuth from "./hooks/useAuth.js"
 function App() {
   const { setAuth } = useAuth();
+  const [loading, setLoading] = useState(true);
 
-
-  useEffect(async () => {
-
+  useEffect(() => {
     async function checkSession() {
       const options = {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         }
       }
       await fetch(Urls.Back + "/Account/Refresh", options)
-        .then(res => res.text())
-        .then(data => {
-          console.log(data);
-          setAuth({ token: data })
+        .then(res => {
+          if (res.status == 200) {
+            setAuth({ token: res.text() });
+          }
+          setLoading(false);
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
-
-    checkSession();
-
-  }, [])
-
+    if (loading)
+      checkSession()
+  })
 
 
+  if (loading) {
+    return (<div></div>)
+  }
   return (
     <div className="App" >
       <Routes>
