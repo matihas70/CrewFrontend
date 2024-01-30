@@ -12,7 +12,7 @@
 }
 .content .inner{
     display: flex;
-    box-shadow: 0 0 5px 0 rgb(245, 245, 245);
+    box-shadow: 0 0 5px 0 rgb(177, 177, 177);
     background-color: rgb(245, 245, 245);
     border-radius: 20px;
 }

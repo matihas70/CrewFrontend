@@ -34,3 +34,13 @@ label{
 .profile-photo input{
     display: none;
 }
+.chose-buttons{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+}
+.chose-buttons .btn{
+    width: 70px;
+}

@@ -25,6 +25,14 @@
 .btn.blue:hover{
     box-shadow: 0 0 4px 0 #0d619f;
 }
+.btn.red{
+    background-color: #eb2d2d;
+    color: #cee6f7;
+    
+}
+.btn.red:hover{
+    box-shadow: 0 0 4px 0 #ff1717;
+}
 .btn.gray{
     background-color: #d2d2d2;
 }
