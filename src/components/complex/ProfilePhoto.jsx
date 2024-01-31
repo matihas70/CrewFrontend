@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import '../../styles/ProfilePhoto.css'
 import useAuth from "../../hooks/useAuth";
 import Urls from "../../Consts/Urls";
@@ -8,27 +8,47 @@ function ProfilePhoto() {
     const [photoRatioClass, setPhotoRatioClass] = useState('')
     const { auth } = useAuth();
     const photoInputRef = useRef();
+    useEffect(() => {
+        async function GetProfilePicture() {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + auth.token
+                }
+            }
+            const file = await fetch(Urls.Back + "/User/ProfilePicture", options)
+                .then(res => {
+                    console.log(res)
+                    return res.blob()
+                })
+            adjustAndSetPhoto(file);
+        }
+        if (!photoURL)
+            GetProfilePicture();
+    })
+    function adjustAndSetPhoto(file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const image = new Image()
+            image.src = e.target.result
+            image.onload = () => {
+                if (image.naturalWidth > image.naturalHeight) {
+                    setPhotoRatioClass("more-width")
+                }
+                else if (image.naturalHeight > image.naturalWidth) {
+                    setPhotoRatioClass("more-height")
+                }
+            }
+        }
+        reader.readAsDataURL(file);
+        setPhotoURL(URL.createObjectURL(file));
+    }
     const onUpload = (event) => {
-        console.log(event.target.files[0]);
         const [file] = event.target.files
 
         if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const image = new Image()
-                image.src = e.target.result
-                image.onload = () => {
-                    if (image.naturalWidth > image.naturalHeight) {
-                        setPhotoRatioClass("more-width")
-                    }
-                    else if (image.naturalHeight > image.naturalWidth) {
-                        setPhotoRatioClass("more-height")
-                    }
-                }
-            }
-            reader.readAsDataURL(file);
-            setPhotoURL(URL.createObjectURL(file));
-            setUploaded(true)
+            adjustAndSetPhoto(file);
+            setUploaded(true);
         }
     }
     const discard = (e) => {
@@ -49,7 +69,8 @@ function ProfilePhoto() {
 
         await fetch(Urls.Back + '/User/SaveProfilePhoto', options)
             .then(res => {
-                console.log(res)
+                if (res.ok)
+                    setUploaded(false)
             })
     }
     const [uploaded, setUploaded] = useState(false);

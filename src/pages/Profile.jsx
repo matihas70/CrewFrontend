@@ -23,7 +23,6 @@ function Profile() {
             let resData
             await fetch(Urls.Back + '/User', options)
                 .then(res => {
-                    console.log(res)
                     return res.json()
                 }).then(data => {
                     resData = data
