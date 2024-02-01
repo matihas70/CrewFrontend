@@ -7,25 +7,18 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Activated from "./pages/Activated"
 import { useContext, useEffect, useState } from "react"
-import NoSession from "./components/NoSession"
-import Protected from "./components/Protected"
+import NoSession from "./components/application/NoSession"
+import Protected from "./components/application/Protected"
 import useAuth from "./hooks/useAuth.js"
-import NavBar from "./components/NavBar"
+import NavBar from "./components/application/NavBar"
+import Connector from "./services/Connector.js"
 function App() {
   const { setAuth } = useAuth();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function checkSession() {
-      const options = {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-      await fetch(Urls.Back + "/Account/Refresh", options)
+      await Connector.CheckSession()
         .then(res => {
           if (res.status == 200) {
             return res.text();

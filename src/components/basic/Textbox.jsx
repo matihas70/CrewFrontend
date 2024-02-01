@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import '../../styles/Textbox.css'
-function Textbox({ label, sendValue, inputRef }) {
+function Textbox({ label, reference, sendValue, id }) {
 
     const sendValOnChange = (event) => {
         sendValue(event.target.value)
@@ -12,7 +12,7 @@ function Textbox({ label, sendValue, inputRef }) {
                 <span>{label}</span>
             </div>
             <div>
-                <input ref={inputRef} onChange={sendValOnChange} type="text" />
+                <input id={id} ref={reference} onChange={sendValOnChange} type="text" />
             </div>
         </div>
     )

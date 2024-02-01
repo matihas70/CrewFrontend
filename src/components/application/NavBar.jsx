@@ -1,22 +1,15 @@
-import useAuth from "../hooks/useAuth"
-import "../styles/NavBar.css"
+import useAuth from "../../hooks/useAuth"
+import "../../styles/NavBar.css"
 import { useNavigate, Outlet } from 'react-router-dom'
-import Urls from "../Consts/Urls"
+import Urls from "../../Consts/Urls"
+import Connector from "../../services/Connector"
 function NavBar() {
 
     const { setAuth } = useAuth()
     const navigate = useNavigate()
 
     const logout = async (e) => {
-        const options = {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }
-        await fetch(Urls.Back + "/Account/Logout", options)
+        Connector.Logout()
             .then(res => {
                 if (res.status == 204) {
                     setAuth(null);

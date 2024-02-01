@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import '../../styles/ProfilePhoto.css'
 import useAuth from "../../hooks/useAuth";
 import Urls from "../../Consts/Urls";
+import Connector from "../../services/Connector";
 
 function ProfilePhoto() {
     const [photoURL, setPhotoURL] = useState('')
@@ -10,22 +11,13 @@ function ProfilePhoto() {
     const photoInputRef = useRef();
     useEffect(() => {
         async function GetProfilePicture() {
-            const options = {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + auth.token
-                }
-            }
-            const file = await fetch(Urls.Back + "/User/ProfilePicture", options)
-                .then(res => {
-                    console.log(res)
-                    return res.blob()
-                })
+            const file = await Connector.GetRequest(auth.token, Urls.Back + "/User/ProfilePicture")
+                .then(res => res.blob())
             adjustAndSetPhoto(file);
         }
-        if (!photoURL)
-            GetProfilePicture();
-    })
+        //if (!photoURL)
+        GetProfilePicture();
+    }, [])
     function adjustAndSetPhoto(file) {
         const reader = new FileReader();
         reader.onload = function (e) {
@@ -56,21 +48,11 @@ function ProfilePhoto() {
         setUploaded(false);
     }
     const accept = async (e) => {
-        const dataFile = new FormData();
 
-        const options = {
-            method: 'PATCH',
-            headers: {
-                'Authorization': 'Bearer ' + auth.token
-            },
-            body: photoInputRef.current.files[0]
-        }
-        let resData
-
-        await fetch(Urls.Back + '/User/SaveProfilePhoto', options)
+        await Connector.PatchRequest(auth.token, Urls.Back + '/User/SaveProfilePhoto', photoInputRef.current.files[0])
             .then(res => {
                 if (res.ok)
-                    setUploaded(false)
+                    setUploaded(false);
             })
     }
     const [uploaded, setUploaded] = useState(false);

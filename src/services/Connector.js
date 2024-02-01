@@ -1,18 +1,46 @@
 import Urls from "../Consts/Urls";
 export default class Connector {
 
+    static GetRequest(token, url){
+        const options = {
+            method: "GET",
+            headers:{
+                Authorization: 'Bearer ' + token,
+            },
+        }
+        return fetch(url, options);
+    }
 
-    static async Save(path, dto){
+    static PatchRequest(token, url, body, isBodyFile=false){
+        
+        let headers={
+            Authorization: 'Bearer ' + token,
+        }
+        if(!isBodyFile){
+            headers['Content-Type'] = 'application/json'
+        }
+        
+        const options = {
+            method: "PATCH",
+            headers: headers,
+            body: JSON.stringify(body)
+        }
+        return fetch(url, options);
+    }
+    static PostRequest(token, url, body){
+
+    }
+
+    static  Logout(){
         const options = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                Name: name,
-                Surname: surname,
-                Email: email,
-                Password: password
-            })
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         }
+        return fetch(Urls.Back + "/Account/Logout", options)
     }
 
     static async Register(name, surname, email, password) {
@@ -66,22 +94,15 @@ export default class Connector {
             return false
         }
     }
-    static async RefreshToken(){
-        const options ={
+    static async CheckSession(){
+        const options = {
             method: 'POST',
             mode: 'cors',
-            headers:{'Content-Type': 'application/json'},
+            credentials: 'include',
+            headers: {
+            'Content-Type': 'application/json',
+            }
         }
-        let response
-        let token
-        await fetch(Urls.Back + '/Account/Refresh', options)
-                                .then(res => {
-                                    console.log(res)
-                                    response = res;
-                                    return res.text()
-                                })
-                                .then(data => token = data);
-        
-        
+        return fetch(Urls.Back + "/Account/Refresh", options)
     }
 }

@@ -6,41 +6,61 @@ import useAuth from '../hooks/useAuth'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Urls from "../Consts/Urls"
+import Connector from "../services/Connector"
 function Profile() {
 
     const textboxLabels = ["Name", "Surname", "Callname"]
     const { auth } = useAuth();
     const navigate = useNavigate();
+    const [profileData, setProfileData] = useState({
+        name: "",
+        surname: "",
+        callname: ""
+    });
+    const TextboxRefs = {
+        name: useRef(null),
+        surname: useRef(null),
+        callname: useRef(null),
+    }
     useEffect(() => {
         async function getData() {
-            const options = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + auth.token
-                },
-            }
             let resData
-            await fetch(Urls.Back + '/User', options)
+            await Connector.GetRequest(auth.token, Urls.Back + '/User')
                 .then(res => {
                     return res.json()
                 }).then(data => {
                     resData = data
                 });
-            textboxRefs["Name"].current.value = resData["name"]
-            textboxRefs["Surname"].current.value = resData["surname"]
-            textboxRefs["Callname"].current.value = resData["callname"]
+            setProfileData(resData)
+            TextboxRefs.name.current.value = resData['name']
+            TextboxRefs.surname.current.value = resData['surname']
+            TextboxRefs.callname.current.value = resData['callname']
+            // textboxRefs["Name"].current.value = resData["name"]
+            // textboxRefs["Surname"].current.value = resData["surname"]
+            // textboxRefs["Callname"].current.value = resData["callname"]
         }
         getData()
     }, [])
+    const SaveData = async (e) => {
+        let body = {
+            Name: TextboxRefs.name.current.value,
+            Surname: TextboxRefs.surname.current.value,
+            Callname: TextboxRefs.callname.current.value
+        }
+        await Connector.PatchRequest(auth.token, Urls.Back + '/User', body)
+            .then(res => {
+                if (res.ok) {
 
-    const [photoUrl, setPhotoURL] = useState('');
-    const textboxRefs = {};
-    const textFields = textboxLabels.map(t => {
-        const ref = useRef(null)
-        textboxRefs[t] = ref
-        return <Textbox label={t} key={t} inputRef={ref} />
-    });
+                }
+            })
+
+    }
+    function onchange(name, value) {
+        console.log(value)
+        setProfileData({ ...profileData, [name]: value })
+        //setProfileData(prev => ({ ...prev, [name]: value }))
+    }
+
     return (
         <>
             <div className="container">
@@ -48,18 +68,20 @@ function Profile() {
                     <div className="inner">
                         <div className="left">
                             <div className="profile-photo">
-                                <ProfilePhoto sendPhotoUrl={setPhotoURL}></ProfilePhoto>
+                                <ProfilePhoto></ProfilePhoto>
                             </div>
                         </div>
                         <div className="right">
                             <div className="main-info">
-                                {textFields}
+                                <Textbox label={"Name"} id={"name"} reference={TextboxRefs.name} />
+                                <Textbox label={"Surname"} id={"surname"} reference={TextboxRefs.surname} />
+                                <Textbox label={"Callname"} id={"callname"} reference={TextboxRefs.callname} />
                             </div>
                         </div>
                     </div>
                     <div className="buttons">
                         <button className="btn blue" onClick={() => { navigate('/') }}>Go to home</button>
-                        <button className="btn green" >Save</button>
+                        <button className="btn green" onClick={SaveData}>Save</button>
                     </div>
                 </div>
 
