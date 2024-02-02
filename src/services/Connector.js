@@ -16,14 +16,19 @@ export default class Connector {
         let headers={
             Authorization: 'Bearer ' + token,
         }
-        if(!isBodyFile){
+        let payload;
+        if(isBodyFile){
+            payload = body
+        }
+        else{
             headers['Content-Type'] = 'application/json'
+            payload = JSON.stringify(body)
         }
         
         const options = {
             method: "PATCH",
             headers: headers,
-            body: JSON.stringify(body)
+            body: payload
         }
         return fetch(url, options);
     }

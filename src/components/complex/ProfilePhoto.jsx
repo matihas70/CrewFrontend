@@ -11,7 +11,7 @@ function ProfilePhoto() {
     const photoInputRef = useRef();
     useEffect(() => {
         async function GetProfilePicture() {
-            const file = await Connector.GetRequest(auth.token, Urls.Back + "/User/ProfilePicture")
+            const file = await Connector.GetRequest(auth.token, Urls.Back + "/User/Photo")
                 .then(res => res.blob())
             adjustAndSetPhoto(file);
         }
@@ -49,7 +49,7 @@ function ProfilePhoto() {
     }
     const accept = async (e) => {
 
-        await Connector.PatchRequest(auth.token, Urls.Back + '/User/SaveProfilePhoto', photoInputRef.current.files[0])
+        await Connector.PatchRequest(auth.token, Urls.Back + '/User/Photo', photoInputRef.current.files[0], true)
             .then(res => {
                 if (res.ok)
                     setUploaded(false);
