@@ -1,0 +1,17 @@
+.addable-container{
+
+}
+.addable-add{
+    border-radius: 100%;
+    background-color: #02D683;
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+}
+.addable-add:hover{
+    cursor: pointer;
+}
+.addable-img{
+    width: 25px;
+    height: 25px;
+}
