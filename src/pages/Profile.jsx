@@ -7,6 +7,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Urls from "../Consts/Urls"
 import Connector from "../services/Connector"
+import ExpandPanel from "../components/complex/ExpandPanel"
+import Addable from "../components/complex/Addable"
 function Profile() {
 
     const textboxLabels = ["Name", "Surname", "Callname"]
@@ -72,10 +74,24 @@ function Profile() {
                             </div>
                         </div>
                         <div className="right">
-                            <div className="main-info">
-                                <Textbox label={"Name"} id={"name"} reference={TextboxRefs.name} />
-                                <Textbox label={"Surname"} id={"surname"} reference={TextboxRefs.surname} />
-                                <Textbox label={"Callname"} id={"callname"} reference={TextboxRefs.callname} />
+                            <div className="info main-info">
+                                <ExpandPanel title={"Main informations"} iconPath={"icons/main-info-icon.svg"}>
+                                    <div className="main-info-inner">
+                                        <Textbox label={"Name"} id={"name"} reference={TextboxRefs.name} />
+                                        <Textbox label={"Surname"} id={"surname"} reference={TextboxRefs.surname} />
+                                        <Textbox label={"Callname"} id={"callname"} reference={TextboxRefs.callname} />
+                                    </div>
+                                </ExpandPanel>
+                            </div>
+                            <div className="info education">
+                                <ExpandPanel title={"Education"} iconPath={"icons/education-icon.svg"}>
+                                    <div>
+                                        <Addable>
+                                            <Textbox label={"School name"} />
+                                            <Textbox label={"Type"} />
+                                        </Addable>
+                                    </div>
+                                </ExpandPanel>
                             </div>
                         </div>
                     </div>

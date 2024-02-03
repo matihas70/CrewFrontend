@@ -27,17 +27,26 @@
 }
 .right{
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+.info{
+    width: 300px;
+    background-color: white;
+    border-radius: 14px;
 }
 .main-info{
     width: 300px;
+    background-color: white;
+    border-radius: 14px;
+}
+.main-info-inner{
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
+    gap:10px;
+    padding: 10px 0;
 }
-
 .buttons{
     display: flex;
     gap:15px;

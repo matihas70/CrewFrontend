@@ -1,0 +1,32 @@
+
+.expand-panel-container{
+    
+}
+.expand-panel-title{
+    position: relative;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+.expand-panel-title.center{
+    width: 100%;
+}
+.expand-panel-title:hover{
+    cursor: pointer;
+}
+.expand-panel-title img{
+    width: 25px;
+}
+.expand-panel{
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 1s;
+}
+.expand-panel.expanded{
+    grid-template-rows: 1fr;
+}
+.expand-panel-inner{
+    overflow: hidden;
+}
