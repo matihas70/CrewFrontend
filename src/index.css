@@ -27,3 +27,18 @@ body{
   min-height: 100vh;
   background-color: white;
 }
+.control{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin:5px;
+}
+.control-label{
+  margin-right: 10px;
+}
+.control-input{
+  box-shadow: 0 0 2px 0px black;
+  border: 0;
+  border-radius: 6px;
+  padding: 5px;
+}

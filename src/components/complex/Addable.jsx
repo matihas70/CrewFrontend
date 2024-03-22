@@ -1,10 +1,9 @@
 import { useRef, cloneElement, useState, createElement } from "react";
 import "../../styles/Addable.css";
 
-function Addable({ children }) {
+function Addable({ children, references, dataArrayCount }) {
     const [contents, setContents] = useState([]);
     const add = (e) => {
-        console.log(children, contents)
 
         setContents(prev => [...prev, children])
     }

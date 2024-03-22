@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Textbox from "../components/basic/Textbox";
 import '../styles/Register.css'
 import Connector from "../services/Connector";
@@ -9,16 +9,29 @@ function Register() {
     const [emailVal, setEmailVal] = useState("")
     const [passwordVal, setPasswordVal] = useState("")
     const [repetePasswordVal, setRepetePasswordVal] = useState("")
+
+    const refs = {
+        name: useRef(null),
+        surname: useRef(null),
+        email: useRef(null),
+        password: useRef(null),
+        repeatePassword: useRef(null)
+    }
     const register = (event) => {
-        Connector.Register(nameVal, surnameVal, emailVal, passwordVal);
+        const name = refs.name.current.value
+        const surname = refs.surname.current.value
+        const email = refs.email.current.value
+        const password = refs.password.current.value
+        const repeatPassword = refs.repeatePassword.current.value
+        Connector.Register(name, surname, email, password);
     }
     return (
         <div className="register-box">
-            <Textbox label={'Name'} sendValue={setNameVal}></Textbox>
-            <Textbox label={'Surname'} sendValue={setSurnameVal}></Textbox>
-            <Textbox label={'Email'} sendValue={setEmailVal}></Textbox>
-            <Textbox label={'Password'} sendValue={setPasswordVal}></Textbox>
-            <Textbox label={'Repete Password'} sendValue={setRepetePasswordVal}></Textbox>
+            <Textbox label={'Name'} reference={refs.name}></Textbox>
+            <Textbox label={'Surname'} reference={refs.surname}></Textbox>
+            <Textbox label={'Email'} reference={refs.email}></Textbox>
+            <Textbox label={'Password'} reference={refs.password}></Textbox>
+            <Textbox label={'Repete Password'} reference={refs.repeatePassword}></Textbox>
             <button className="btn save" onClick={register}>Register</button>
         </div>
     )

@@ -35,6 +35,17 @@ export default class Connector {
     static PostRequest(token, url, body){
 
     }
+    static PutRequest(token, url, body){
+        const options = {
+            method: "PUT",
+            headers:{
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+            },
+            body: JSON.stringify(body)
+        }
+        return fetch(url, options)
+    }
 
     static  Logout(){
         const options = {

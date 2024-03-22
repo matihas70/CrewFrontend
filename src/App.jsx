@@ -1,5 +1,5 @@
 import Home from "./Pages/Home"
-import Profile from "./pages/Profile"
+import Profile from "./pages/Profile/Profile.jsx"
 import { Link, Route, Routes } from "react-router-dom"
 import './App.css'
 import Urls from "./Consts/Urls.js"

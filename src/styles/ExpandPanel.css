@@ -22,7 +22,7 @@
 .expand-panel{
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 1s;
+    transition: grid-template-rows .5s;
 }
 .expand-panel.expanded{
     grid-template-rows: 1fr;

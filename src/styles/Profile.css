@@ -32,25 +32,12 @@
     gap:15px;
 }
 .info{
-    width: 300px;
+    width: 400px;
     background-color: white;
     border-radius: 14px;
 }
-.main-info{
-    width: 300px;
-    background-color: white;
-    border-radius: 14px;
-}
-.main-info-inner{
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-    padding: 10px 0;
-}
-.buttons{
-    display: flex;
-    gap:15px;
-    flex-direction: row;
-    justify-content: end;
-    margin: 20px;
+.buttons-info{
+    position: relative;
+    margin: auto;
+    margin-right: 10px;
 }
