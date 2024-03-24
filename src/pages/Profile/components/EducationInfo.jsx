@@ -78,6 +78,9 @@ function EducationInfo() {
             degree: createRef()
         }
         const controlsDOM = (<>
+            <div className="action remove" onClick={removeControls}>
+                <img className="action-img" src="icons/remove.svg" alt="" />
+            </div>
             <input type="text" name="id" hidden ref={refs.id} />
             <Textbox label={"School name"} reference={refs.schoolName} />
             <Selectbox label={"Type"} reference={refs.schoolType} options={selectboxOptions} />
@@ -90,14 +93,18 @@ function EducationInfo() {
         </>)
         setControls(prev => [...prev, { controlsDOM, refs }])
     }
+    const removeControls = (e) => {
+        console.log(e)
+        e.target.parentElement.parentElement.remove();
+    }
     return (
         <ExpandPanel title={"Education"} iconPath={"icons/education-icon.svg"}>
             <div>
                 <div className="addable-content">
                     {controls.map((c, i) => <div className="education-controls" key={i}>{c.controlsDOM}</div>)}
                 </div>
-                <div className="addable-add" onClick={addControls}>
-                    <img className="addable-img" src="icons/add.svg" alt="" />
+                <div className="action add" onClick={addControls}>
+                    <img className="action-img" src="icons/add.svg" alt="" />
                 </div>
                 <div className="buttons-info">
                     <button className="btn green" onClick={save}>Save</button>
