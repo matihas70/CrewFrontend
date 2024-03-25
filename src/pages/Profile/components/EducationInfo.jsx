@@ -54,6 +54,9 @@ function EducationInfo() {
             degree: createRef()
         }
         const controlsDOM = (<>
+            <div className="action remove" onClick={removeControls}>
+                <img className="action-img" src="icons/remove.svg" alt="" />
+            </div>
             <input type="text" name="id" hidden ref={refs.id} defaultValue={data.id} />
             <Textbox label={"School name"} reference={refs.schoolName} initValue={data.schoolName} />
             <Selectbox label={"Type"} reference={refs.schoolType} initValue={data.schoolType} options={selectboxOptions} />
@@ -78,7 +81,7 @@ function EducationInfo() {
             degree: createRef()
         }
         const controlsDOM = (<>
-            <div className="action remove" onClick={removeControls}>
+            <div className="action remove" onClick={(e) => removeControls(e, refs.id)}>
                 <img className="action-img" src="icons/remove.svg" alt="" />
             </div>
             <input type="text" name="id" hidden ref={refs.id} />
@@ -93,8 +96,9 @@ function EducationInfo() {
         </>)
         setControls(prev => [...prev, { controlsDOM, refs }])
     }
-    const removeControls = (e) => {
+    const removeControls = (e, idRef) => {
         console.log(e)
+        //idRef.current.value
         e.target.parentElement.parentElement.remove();
     }
     return (

@@ -23,6 +23,8 @@
 }
 .add{
     background-color: #02D683;
+    margin-left: auto;
+  margin-right: auto;
 }
 .remove{
     background-color: #d63e02;
