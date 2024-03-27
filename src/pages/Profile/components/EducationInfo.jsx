@@ -54,7 +54,7 @@ function EducationInfo() {
             degree: createRef()
         }
         const controlsDOM = (<>
-            <div className="action remove" onClick={removeControls}>
+            <div className="action remove" onClick={(e) => removeControls(e, refs.id)}>
                 <img className="action-img" src="icons/remove.svg" alt="" />
             </div>
             <input type="text" name="id" hidden ref={refs.id} defaultValue={data.id} />
@@ -96,9 +96,13 @@ function EducationInfo() {
         </>)
         setControls(prev => [...prev, { controlsDOM, refs }])
     }
-    const removeControls = (e, idRef) => {
-        console.log(e)
-        //idRef.current.value
+    const removeControls = async (e, idRef) => {
+        console.log(e, idRef)
+        const id = idRef.current.value
+        if (id) {
+            await Connector.DeleteRequest(auth.token, Urls.Back + `/User/Education/${id}`)
+                .then(res => console.log(res))
+        }
         e.target.parentElement.parentElement.remove();
     }
     return (

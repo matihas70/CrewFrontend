@@ -46,6 +46,15 @@ export default class Connector {
         }
         return fetch(url, options)
     }
+    static DeleteRequest(token, url){
+        const options = {
+            method: "DELETE",
+            headers: {
+                Authorization: 'Bearer ' + token,
+            }
+        }
+        return fetch(url, options);
+    }
 
     static  Logout(){
         const options = {
